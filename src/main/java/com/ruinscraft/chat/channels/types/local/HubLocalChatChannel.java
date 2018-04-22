@@ -11,8 +11,8 @@ import com.ruinscraft.chat.channels.types.LocalChatChannel;
 
 public class HubLocalChatChannel extends LocalChatChannel {
 
-	public HubLocalChatChannel() {
-		super("hub");
+	public HubLocalChatChannel(String format) {
+		super("hub", format);
 	}
 
 	@Override

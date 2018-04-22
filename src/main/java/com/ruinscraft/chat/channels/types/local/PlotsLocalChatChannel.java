@@ -17,8 +17,8 @@ public class PlotsLocalChatChannel extends LocalChatChannel {
 
 	private static ChatPlugin chatPlugin = ChatPlugin.getInstance();
 
-	public PlotsLocalChatChannel() {
-		super("plots");
+	public PlotsLocalChatChannel(String format) {
+		super("plots", format);
 	}
 
 	@Override

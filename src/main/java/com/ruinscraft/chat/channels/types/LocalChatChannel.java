@@ -13,8 +13,8 @@ public abstract class LocalChatChannel extends ChatChannel {
 
 	private String variant;
 	
-	public LocalChatChannel(String variant) {
-		super("local", true, true);
+	public LocalChatChannel(String format, String variant) {
+		super("local", format, true, true);
 		this.variant = variant;
 	}
 	

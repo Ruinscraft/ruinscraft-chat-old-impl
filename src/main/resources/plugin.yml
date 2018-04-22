@@ -2,6 +2,8 @@ name: ${name}
 version: ${version}
 main: ${mainClass}
 
+softdepend: [Vault, PlotSquared]
+
 commands:
   pm:
     aliases: [message, msg, m, whisper, whis, w, tell, t]

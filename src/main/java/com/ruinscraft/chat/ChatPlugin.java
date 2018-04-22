@@ -3,6 +3,7 @@ package com.ruinscraft.chat;
 import java.util.Optional;
 
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
@@ -23,6 +24,8 @@ import com.ruinscraft.chat.players.ChatPlayerHandler;
 import com.ruinscraft.chat.redis.RedisHandler;
 import com.ruinscraft.chat.storage.Storage;
 
+import net.milkbowl.vault.chat.Chat;
+
 public class ChatPlugin extends JavaPlugin implements PluginMessageListener {
 
 	private Storage storage;
@@ -32,6 +35,8 @@ public class ChatPlugin extends JavaPlugin implements PluginMessageListener {
 	private ChatChannelHandler chatChannelHandler;
 
 	private boolean usingPlotSquared = false;
+	
+	private Chat chat;
 
 	private static Optional<String> bungeeServerName = Optional.empty();
 
@@ -93,6 +98,12 @@ public class ChatPlugin extends JavaPlugin implements PluginMessageListener {
 		if (usingPlotSquared) {
 			getLogger().info("Found PlotSquared");
 		}
+		
+		if (getServer().getPluginManager().isPluginEnabled("Vault")) {
+	        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
+	        chat = rsp.getProvider();
+	        getLogger().info("Found Vault");
+		}
 	}
 
 	@Override
@@ -135,6 +146,10 @@ public class ChatPlugin extends JavaPlugin implements PluginMessageListener {
 
 	public boolean isUsingPlotSquared() {
 		return usingPlotSquared;
+	}
+	
+	public Chat getChat() {
+		return chat;
 	}
 
 	@Override

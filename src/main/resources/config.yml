@@ -1,10 +1,14 @@
 channels:
   local:
-    enabled: true
     variant: hub
+    format: '[L] [%prefix%] %username% > &e%message%'
+    format_spy: '&7&o[L (%server%)] [%prefix%] %username% > %message%'
   global:
-    enabled: true
-
+    format: '[G] [%prefix%] %username% > %message%'
+  pm:
+    format_to: '&3[to: %target%] &b%message%'
+    format_from: '&3[from: %sender%] &b%message%'
+  
 redis:
   channel: rcdev
   host: localhost

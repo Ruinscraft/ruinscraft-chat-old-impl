@@ -11,8 +11,8 @@ import com.ruinscraft.chat.channels.ChatChannel;
 
 public class GlobalChatChannel extends ChatChannel {
 
-	public GlobalChatChannel() {
-		super("global", false, true);
+	public GlobalChatChannel(String format) {
+		super("global", format, false, true);
 	}
 
 	@Override

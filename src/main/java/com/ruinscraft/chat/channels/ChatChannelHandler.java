@@ -3,6 +3,7 @@ package com.ruinscraft.chat.channels;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ruinscraft.chat.ChatPlugin;
 import com.ruinscraft.chat.channels.types.GlobalChatChannel;
 import com.ruinscraft.chat.channels.types.LocalChatChannel;
 import com.ruinscraft.chat.channels.types.local.HubLocalChatChannel;
@@ -12,17 +13,21 @@ import com.ruinscraft.chat.channels.types.local.SkyblockLocalChatChannel;
 
 public class ChatChannelHandler {
 
+	private static ChatPlugin chatPlugin = ChatPlugin.getInstance();
+	
 	private Map<String, ChatChannel> chatChannels = new HashMap<>();
 	
 	public ChatChannelHandler(String localVariant) {
-		chatChannels.put("global", new GlobalChatChannel());
+		chatChannels.put("global", new GlobalChatChannel(chatPlugin.getConfig().getString("channels.global.format")));
 		
 		Map<String, LocalChatChannel> localChatChannels = new HashMap<>();
 		
-		localChatChannels.put("hub", new HubLocalChatChannel());
-		localChatChannels.put("infinite", new InfiniteLocalChatChannel());
-		localChatChannels.put("plots", new PlotsLocalChatChannel());
-		localChatChannels.put("skyblock", new SkyblockLocalChatChannel());
+		String localFormat = chatPlugin.getConfig().getString("channels.local.format");
+		
+		localChatChannels.put("hub", new HubLocalChatChannel(localFormat));
+		localChatChannels.put("infinite", new InfiniteLocalChatChannel(localFormat));
+		localChatChannels.put("plots", new PlotsLocalChatChannel(localFormat));
+		localChatChannels.put("skyblock", new SkyblockLocalChatChannel(localFormat));
 		
 		if (localChatChannels.containsKey(localVariant)) {
 			chatChannels.put("local", localChatChannels.get(localVariant));
