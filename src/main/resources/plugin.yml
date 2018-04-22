@@ -1,0 +1,10 @@
+name: ${name}
+version: ${version}
+main: ${mainClass}
+
+commands:
+  pm:
+    aliases: [message, msg, m, whisper, whis, w, tell, t]
+  ignore:
+  channel:
+  spy:
