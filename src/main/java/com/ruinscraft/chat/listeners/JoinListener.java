@@ -1,5 +1,6 @@
 package com.ruinscraft.chat.listeners;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,6 +23,8 @@ public class JoinListener implements Listener {
 		
 		final Player player = event.getPlayer();
 		
+		setDisplayName(player);
+		
 		chatPlugin.getChatPlayerHandler().getChatPlayer(player.getUniqueId());
 		
 		if (!ChatPlugin.isServerNameSet()) {
@@ -42,4 +45,11 @@ public class JoinListener implements Listener {
 		}
 	}
 
+	private void setDisplayName(Player player) {
+		String color = ChatColor.getLastColors(chatPlugin.getVaultChat().getPlayerPrefix(player));
+		
+		player.setDisplayName(color + player.getName());
+		player.setPlayerListName(color + player.getName());
+	}
+	
 }
