@@ -44,6 +44,14 @@ public class ChatPlayer {
 	public Set<UUID> getIgnoring() {
 		return ignoring;
 	}
+	
+	public boolean isIgnoring(UUID uuid) {
+		return ignoring.contains(uuid);
+	}
+	
+	public boolean ignore(UUID uuid) {
+		return ignoring.add(uuid);
+	}
 
 	public Set<ChatChannel> getSpying() {
 		return spying;

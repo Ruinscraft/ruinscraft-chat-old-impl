@@ -3,8 +3,6 @@ package com.ruinscraft.chat.storage;
 import java.util.Set;
 import java.util.UUID;
 
-import com.ruinscraft.chat.channels.ChatChannel;
-
 public interface Storage {
 
 	Set<UUID> getIgnored(UUID uuid);
@@ -13,7 +11,7 @@ public interface Storage {
 	
 	Set<String> getSpying(UUID uuid);
 	
-	ChatChannel getFocusedChannel(UUID uuid);
+	String getFocusedChannel(UUID uuid);
 	
 	void setFocusedChannel(UUID uuid, String channelName);
 	

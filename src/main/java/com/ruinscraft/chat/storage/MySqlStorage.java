@@ -1,7 +1,10 @@
 package com.ruinscraft.chat.storage;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -14,7 +17,7 @@ import com.zaxxer.hikari.HikariDataSource;
 public class MySqlStorage implements SqlStorage {
 
 	private DataSource dataSource;
-	
+
 	public MySqlStorage(String host, int port, String database, String username, String password) {
 		HikariConfig hikariConfig = new HikariConfig();
 
@@ -28,13 +31,17 @@ public class MySqlStorage implements SqlStorage {
 
 		dataSource = new HikariDataSource(hikariConfig);
 	}
-	
-	
+
+
 	@Override
 	public void createTables() {
-		
-		
-		
+		try (Connection c = getConnection();
+				PreparedStatement ps = c.prepareStatement(null)) {
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -45,78 +52,169 @@ public class MySqlStorage implements SqlStorage {
 
 	@Override
 	public Set<UUID> getIgnored(UUID uuid) {
-		// TODO Auto-generated method stub
-		return null;
+		Set<UUID> ignored = new HashSet<>();
+
+		try (Connection c = getConnection();
+				PreparedStatement ps = c.prepareStatement(query_ignored)) {
+			ps.setString(1, uuid.toString());
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				ignored.add(UUID.fromString(rs.getString("ignored")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return ignored;
 	}
 
 
 	@Override
 	public Set<String> getMuted(UUID uuid) {
-		// TODO Auto-generated method stub
-		return null;
+		Set<String> muted = new HashSet<>();
+
+		try (Connection c = getConnection();
+				PreparedStatement ps = c.prepareStatement(query_muted)) {
+			ps.setString(1, uuid.toString());
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				muted.add(rs.getString("muted"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return muted;
 	}
 
 
 	@Override
 	public Set<String> getSpying(UUID uuid) {
-		// TODO Auto-generated method stub
-		return null;
+		Set<String> spying = new HashSet<>();
+
+		try (Connection c = getConnection();
+				PreparedStatement ps = c.prepareStatement(query_spying)) {
+			ps.setString(1, uuid.toString());
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				spying.add(rs.getString("spying"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return spying;
 	}
 
 
 	@Override
-	public ChatChannel getFocusedChannel(UUID uuid) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getFocusedChannel(UUID uuid) {
+		String focused = "";
+
+		try (Connection c = getConnection();
+				PreparedStatement ps = c.prepareStatement(query_focused)) {
+			ps.setString(1, uuid.toString());
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				focused = rs.getString("focused");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return focused;
 	}
 
 
 	@Override
 	public void setFocusedChannel(UUID uuid, String channelName) {
-		// TODO Auto-generated method stub
-		
+		try (Connection c = getConnection();
+				PreparedStatement ps = c.prepareStatement(update_focused)) {
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
 	@Override
 	public void addIgnored(UUID ignorer, UUID ignored) {
-		// TODO Auto-generated method stub
-		
+		try (Connection c = getConnection();
+				PreparedStatement ps = c.prepareStatement(insert_ignored)) {
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
 	@Override
 	public void addMuted(UUID uuid, String channelName) {
-		// TODO Auto-generated method stub
-		
+		try (Connection c = getConnection();
+				PreparedStatement ps = c.prepareStatement(insert_muted)) {
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
 	@Override
 	public void addSpying(UUID uuid, String channelName) {
-		// TODO Auto-generated method stub
-		
+		try (Connection c = getConnection();
+				PreparedStatement ps = c.prepareStatement(insert_spying)) {
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
 	@Override
 	public void removeIgnored(UUID ignorer, UUID ignored) {
-		// TODO Auto-generated method stub
-		
+		try (Connection c = getConnection();
+				PreparedStatement ps = c.prepareStatement(delete_ignored)) {
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
 	@Override
 	public void removeMuted(UUID uuid, String channelName) {
-		// TODO Auto-generated method stub
-		
+		try (Connection c = getConnection();
+				PreparedStatement ps = c.prepareStatement(delete_muted)) {
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
 	@Override
 	public void removeSpying(UUID uuid, String channelName) {
-		// TODO Auto-generated method stub
-		
+		try (Connection c = getConnection();
+				PreparedStatement ps = c.prepareStatement(delete_spying)) {
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 }
