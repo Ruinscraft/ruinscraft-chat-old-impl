@@ -26,7 +26,11 @@ public class ChatListener implements Listener {
 		
 		ChatChannel chatChannel = chatPlayer.getFocusedChannel();
 		
-		ChatMessage chatMessage = new ChatMessage(ChatPlugin.getServerName(), chatChannel.getName(), player.getName(), payload);
+		ChatMessage chatMessage = new ChatMessage(
+				ChatPlugin.getServerName(), 
+				chatChannel.getName(), 
+				ChatPlugin.getInstance().getVaultChat().getPlayerPrefix(player), 
+				player.getName(), payload);
 		
 		chatPlugin.getMessageBroker().sendChat(chatMessage);
  	}

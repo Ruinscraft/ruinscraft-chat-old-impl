@@ -1,7 +1,5 @@
 package com.ruinscraft.chat.redis;
 
-import org.bukkit.Bukkit;
-
 import com.ruinscraft.chat.ChatPlugin;
 
 import net.md_5.bungee.api.ChatColor;
@@ -10,12 +8,14 @@ public class ChatMessage {
 
 	private String serverName;
 	private String channelName;
+	private String prefix;
 	private String sender;
 	private String payload;
 
-	public ChatMessage(String serverName, String channelName, String sender, String payload) {
+	public ChatMessage(String serverName, String channelName, String prefix, String sender, String payload) {
 		this.serverName = serverName;
 		this.channelName = channelName;
+		this.prefix = prefix;
 		this.sender = sender;
 		this.payload = payload;
 	}
@@ -37,15 +37,22 @@ public class ChatMessage {
 	}
 
 	public String getFormatted(String format) {
-		return ChatColor.translateAlternateColorCodes('&',
-				format
+		return ChatColor.translateAlternateColorCodes('&', format
 				.replace("%server%", serverName)
+				.replace("%servercolor%", getServerColor().toString())
 				.replace("%channel%", channelName)
-				.replace("%prefix%", ChatPlugin.getInstance().getChat().getPlayerPrefix(Bukkit.getServer().getWorlds().get(0), sender))
+				.replace("%prefix%", prefix)
 				.replace("%sender%", sender)
 				.replace("%message%", payload));
 	}
 
+	public ChatColor getServerColor() {
+		if (serverName.equals(ChatPlugin.getServerName())) {
+			return ChatColor.GREEN;
+		}
+		return ChatColor.GRAY;
+	}
+	
 	public String getAsJson() {
 		return ChatPlugin.GSON.toJson(this);
 	}

@@ -94,8 +94,6 @@
 				<configuration>
 					<relocations>
 						<relocation>
-							<pattern>redis.clients.jedis</pattern>
-							<shadedPattern>com.ruinscraft.chat.redis</shadedPattern>
 							<pattern>org.apache.commons</pattern>
 							<shadedPattern>com.ruinscraft.chat.redis</shadedPattern>
 						</relocation>

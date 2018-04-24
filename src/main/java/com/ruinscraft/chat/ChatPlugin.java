@@ -34,10 +34,10 @@ public class ChatPlugin extends JavaPlugin implements PluginMessageListener {
 	private ChatPlayerHandler chatPlayerHandler;
 	private ChatChannelHandler chatChannelHandler;
 
+    private Chat vaultChat;
+	
 	private boolean usingPlotSquared = false;
 	
-	private Chat chat;
-
 	private static Optional<String> bungeeServerName = Optional.empty();
 
 	public static void setServerName(String serverName) {
@@ -65,6 +65,12 @@ public class ChatPlugin extends JavaPlugin implements PluginMessageListener {
 	public void onEnable() {
 		instance = this;
 
+		if (getServer().getPluginManager().getPlugin("Vault") == null) {
+			getLogger().info("Vault not found.");
+			getServer().getPluginManager().disablePlugin(this);
+			return;
+		}
+		
 		saveDefaultConfig();
 
 		//storage = new MySqlStorage(
@@ -99,11 +105,8 @@ public class ChatPlugin extends JavaPlugin implements PluginMessageListener {
 			getLogger().info("Found PlotSquared");
 		}
 		
-		if (getServer().getPluginManager().isPluginEnabled("Vault")) {
-	        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
-	        chat = rsp.getProvider();
-	        getLogger().info("Found Vault");
-		}
+        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
+        vaultChat = rsp.getProvider();
 	}
 
 	@Override
@@ -148,8 +151,8 @@ public class ChatPlugin extends JavaPlugin implements PluginMessageListener {
 		return usingPlotSquared;
 	}
 	
-	public Chat getChat() {
-		return chat;
+	public Chat getVaultChat() {
+		return vaultChat;
 	}
 
 	@Override

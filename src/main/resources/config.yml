@@ -3,7 +3,7 @@ channels:
     variant: hub
     format: '&b[L] &7[%prefix%&7] &7%sender% &8&l> &e%message%'
   global:
-    format: '&7[G] [%prefix%&7] &7%sender% &8&l> &f%message%'
+    format: '%servercolor%[G] &7[%prefix%&7] &7%sender% &8&l> &f%message%'
   mb:
     format: '&7[&aMB&7] &7[&a%server%&7] &c%sender% &c&l> &a%message%'
   pm:
