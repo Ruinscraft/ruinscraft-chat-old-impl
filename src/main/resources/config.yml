@@ -13,7 +13,9 @@ channels:
 redis:
   channel: rcdev
   host: localhost
-  
+
+disable_quit_join_messages: true
+
 storage:
   mysql:
     host: localhost

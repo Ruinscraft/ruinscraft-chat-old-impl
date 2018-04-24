@@ -16,6 +16,10 @@ public class JoinListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
+		if (chatPlugin.getConfig().getBoolean("disable_quit_join_messages")) {
+			event.setJoinMessage(null);
+		}
+		
 		final Player player = event.getPlayer();
 		
 		chatPlugin.getChatPlayerHandler().getChatPlayer(player.getUniqueId());
@@ -33,7 +37,9 @@ public class JoinListener implements Listener {
 
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
-		
+		if (chatPlugin.getConfig().getBoolean("disable_quit_join_messages")) {
+			event.setQuitMessage(null);
+		}
 	}
 
 }
