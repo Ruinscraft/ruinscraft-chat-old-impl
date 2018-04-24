@@ -22,6 +22,7 @@ public class RedisHandler {
 
 		subscriber = new RedisChatSubscriber();
 
+		// blocking task
 		chatPlugin.getServer().getScheduler().runTaskAsynchronously(ChatPlugin.getInstance(), () -> {
 			try (Jedis jedis = jedisPool.getResource()) {
 				jedis.subscribe(subscriber, channel);
@@ -57,6 +58,7 @@ public class RedisHandler {
 			try {
 				chatMessage = ChatMessage.fromJson(message);
 			} catch (Exception e) {
+				chatPlugin.getLogger().warning("Could not parse ChatMessage " + chatMessage);
 				e.printStackTrace();
 			}
 			
