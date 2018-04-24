@@ -6,6 +6,7 @@ import java.util.Map;
 import com.ruinscraft.chat.ChatPlugin;
 import com.ruinscraft.chat.channels.types.GlobalChatChannel;
 import com.ruinscraft.chat.channels.types.LocalChatChannel;
+import com.ruinscraft.chat.channels.types.MBChatChannel;
 import com.ruinscraft.chat.channels.types.local.HubLocalChatChannel;
 import com.ruinscraft.chat.channels.types.local.InfiniteLocalChatChannel;
 import com.ruinscraft.chat.channels.types.local.PlotsLocalChatChannel;
@@ -32,6 +33,8 @@ public class ChatChannelHandler {
 		if (localChatChannels.containsKey(localVariant)) {
 			chatChannels.put("local", localChatChannels.get(localVariant));
 		}
+		
+		chatChannels.put("mb", new MBChatChannel(chatPlugin.getConfig().getString("channels.mb.format")));
 	}
 	
 	public void clearChannels() {

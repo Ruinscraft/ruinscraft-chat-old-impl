@@ -1,10 +1,11 @@
 channels:
   local:
     variant: hub
-    format: '[L] [%prefix%] %username% > &e%message%'
-    format_spy: '&7&o[L (%server%)] [%prefix%] %username% > %message%'
+    format: '&b[L] &7[%prefix%&7] &7%sender% &8&l> &e%message%'
   global:
-    format: '[G] [%prefix%] %username% > %message%'
+    format: '&7[G] [%prefix%&7] &7%sender% &8&l> &f%message%'
+  mb:
+    format: '&7[&aMB&7] &7[&a%server%&7] &c%sender% &c&l> &a%message%'
   pm:
     format_to: '&3[to: %target%] &b%message%'
     format_from: '&3[from: %sender%] &b%message%'

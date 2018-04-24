@@ -10,6 +10,8 @@ import com.ruinscraft.chat.ChatPlugin;
 import com.ruinscraft.chat.redis.ChatMessage;
 import com.ruinscraft.chat.redis.RedisHandler;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class GenericMessageBroker implements MessageBroker {
 
 	private static ChatPlugin chatPlugin = ChatPlugin.getInstance();
@@ -27,9 +29,7 @@ public class GenericMessageBroker implements MessageBroker {
 		if (Bukkit.getPlayer(chatMessage.getSender()) != null && Bukkit.getPlayer(chatMessage.getSender()).isOnline()) {
 			senderOptional = Optional.of(Bukkit.getPlayer(chatMessage.getSender()));
 		}
-		
-		String message = chatChannel.getName() + ": " + chatMessage.getSender() + " > " + chatMessage.getPayload();
-		
+
 		for (Player recipient : chatChannel.getRecipients(senderOptional)) {
 			// if this isnt the server the message was sent on and the channel is local
 			if (chatMessage.getChannelName().equals("local") && !chatMessage.getServerName().equals(ChatPlugin.getServerName())) {
@@ -46,10 +46,10 @@ public class GenericMessageBroker implements MessageBroker {
 				}
 			}
 			
-			recipient.sendMessage(message);
+			recipient.sendMessage(chatMessage.getFormatted(chatChannel.getFormat()));
 		}
 		
-		System.out.println("[" + chatMessage.getServerName() + "] " + message);
+		System.out.println(ChatColor.stripColor(chatMessage.getFormatted(chatChannel.getFormat())));
 	}
 
 	@Override

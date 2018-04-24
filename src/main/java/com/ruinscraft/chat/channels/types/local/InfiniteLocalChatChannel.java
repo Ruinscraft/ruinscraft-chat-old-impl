@@ -18,7 +18,7 @@ public class InfiniteLocalChatChannel extends LocalChatChannel {
 	private static ChatPlugin chatPlugin = ChatPlugin.getInstance();
 	
 	public InfiniteLocalChatChannel(String format) {
-		super("infinite", format);
+		super(format, "infinite");
 	}
 
 	@Override

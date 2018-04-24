@@ -31,8 +31,14 @@ public class ChatPlayer {
 		return focusedChannel;
 	}
 
-	public void setFocusedChannel(ChatChannel focusedChannel) {
+	public boolean setFocusedChannel(ChatChannel focusedChannel) {
+		if (!focusedChannel.isFocusable()) {
+			return false;
+		}
+		
 		this.focusedChannel = focusedChannel;
+		
+		return true;
 	}
 
 	public Set<UUID> getIgnoring() {

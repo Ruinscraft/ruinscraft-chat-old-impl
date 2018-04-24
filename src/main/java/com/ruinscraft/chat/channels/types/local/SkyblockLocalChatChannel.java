@@ -12,7 +12,7 @@ import com.ruinscraft.chat.channels.types.LocalChatChannel;
 public class SkyblockLocalChatChannel extends LocalChatChannel {
 
 	public SkyblockLocalChatChannel(String format) {
-		super("skyblock", format);
+		super(format, "skyblock");
 	}
 
 	@Override

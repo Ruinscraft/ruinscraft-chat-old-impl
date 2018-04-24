@@ -37,9 +37,11 @@ public class ChannelCommand implements CommandExecutor {
 				return true;
 			}
 
-			chatPlayer.setFocusedChannel(newChannel);
-			
-			player.sendMessage("Set focused channel to " + newChannel.getName());
+			if (chatPlayer.setFocusedChannel(newChannel)) {
+				player.sendMessage("Set focused channel to " + newChannel.getName());
+			} else {
+				player.sendMessage("You cannot set focus to this channel");
+			}
 			
 			return true;
 		} 
