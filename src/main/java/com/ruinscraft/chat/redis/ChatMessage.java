@@ -46,7 +46,7 @@ public class ChatMessage {
 				.replace("%message%", payload));
 	}
 
-	public ChatColor getServerColor() {
+	private ChatColor getServerColor() {
 		if (serverName.equals(ChatPlugin.getServerName())) {
 			return ChatColor.GREEN;
 		}

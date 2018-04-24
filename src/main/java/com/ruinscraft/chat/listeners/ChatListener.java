@@ -45,8 +45,10 @@ public class ChatListener implements Listener {
 				continue;
 			}
 			
-			if (command.equalsIgnoreCase(chatChannel.getName())) {
+			if (command.equalsIgnoreCase("/" + chatChannel.getName())) {
 				player.performCommand("channel " + chatChannel.getName());
+				
+				event.setCancelled(true);
 			}
 		}
 	}
